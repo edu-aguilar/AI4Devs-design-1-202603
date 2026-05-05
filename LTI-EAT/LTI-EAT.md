@@ -173,47 +173,47 @@ mindmap
 
 ### Caso de Uso 1: Publicación de Posición y Reclutamiento Activo
 
-```mermaid
-useCaseDiagram
-    direction TB
-    
-    actor "HR Manager" as HR
-    actor "Hiring Manager" as HM
-    actor "Sistema IA" as IA
-    actor "Job Boards" as JB
-    
-    rectangle "Modulo Jobs" {
-        usecase "Crear posicion" as UC1
-        usecase "Configurar flujo de seleccion" as UC2
-        usecase "Publicar en job boards" as UC3
-    }
-    
-    rectangle "Modulo IA" {
-        usecase "Sugerir requisitos" as UC4
-        usecase "Generar descripcion" as UC5
-    }
-    
-    rectangle "Modulo Analytics" {
-        usecase "Trackear metricas" as UC6
-    }
-    
-    HR --> UC1
-    UC1 ..> UC4 : extends
-    UC4 --> IA
-    UC1 ..> UC5 : extends
-    UC5 --> IA
-    HR --> UC2
-    HM --> UC2
-    HR --> UC3
-    UC3 --> JB
-    JB --> UC6
-    
-    note right of UC4
-      El sistema IA analiza trends
-      del mercado y sugiere
-      salary y requirements
-    end note
-```
+```plantuml
+@startuml
+left to right direction
+
+actor "HR Manager" as HR
+actor "Hiring Manager" as HM
+actor "Sistema IA" as IA
+actor "Job Boards" as JB
+
+rectangle "Modulo Jobs" {
+    usecase "Crear posicion" as UC1
+    usecase "Configurar flujo de seleccion" as UC2
+    usecase "Publicar en job boards" as UC3
+}
+
+rectangle "Modulo IA" {
+    usecase "Sugerir requisitos" as UC4
+    usecase "Generar descripcion" as UC5
+}
+
+rectangle "Modulo Analytics" {
+    usecase "Trackear metricas" as UC6
+}
+
+HR --> UC1
+UC1 ..> UC4 : extends
+UC4 --> IA
+UC1 ..> UC5 : extends
+UC5 --> IA
+HR --> UC2
+HM --> UC2
+HR --> UC3
+UC3 -[dashed]-> JB
+JB -[dashed]-> UC6
+
+note right of UC4
+  El sistema IA analiza trends
+  del mercado y sugiere
+  salary y requirements
+end note
+@enduml```
 
 **Descripción Detallada**:
 
@@ -221,53 +221,53 @@ El caso de uso comienza cuando un HR Manager necesita crear una nueva posición.
 
 ### Caso de Uso 2: Cribado y Evaluación de Candidatos con IA
 
-```mermaid
-useCaseDiagram
-    direction TB
-    
-    actor "Reclutador" as R
-    actor "Candidato" as C
-    actor "Sistema IA" as IA
-    actor "Hiring Manager" as HM
-    
-    rectangle "Modulo Screening" {
-        usecase "Recibir aplicacion" as UC1
-        usecase "Parsear CV" as UC2
-        usecase "Ranking IA" as UC3
-        usecase "Solicitar info adicional" as UC4
-    }
-    
-    rectangle "Modulo Candidate" {
-        usecase "Aplicar a posicion" as UC5
-        usecase "Completar formulario" as UC6
-    }
-    
-    rectangle "Modulo Collaboration" {
-        usecase "Revisar candidatos" as UC7
-        usecase "Dejar feedback" as UC8
-    }
-    
-    C --> UC5
-    UC5 --> UC1
-    UC1 --> UC2
-    UC2 --> UC3
-    UC3 ..> UC4 : extends
-    UC4 ..> UC6
-    UC6 --> IA
-    
-    R --> UC7
-    UC7 --> UC8
-    UC8 --> UC3
-    
-    HM --> UC7
-    HM --> UC8
-    
-    note right of UC3
-      El sistema IA rankea candidatos
-      basandose en compatibilidad
-      con requisitos y cultura
-    end note
-```
+```plantuml
+@startuml
+left to right direction
+
+actor "Reclutador" as R
+actor "Candidato" as C
+actor "Sistema IA" as IA
+actor "Hiring Manager" as HM
+
+rectangle "Modulo Screening" {
+    usecase "Recibir aplicacion" as UC1
+    usecase "Parsear CV" as UC2
+    usecase "Ranking IA" as UC3
+    usecase "Solicitar info adicional" as UC4
+}
+
+rectangle "Modulo Candidate" {
+    usecase "Aplicar a posicion" as UC5
+    usecase "Completar formulario" as UC6
+}
+
+rectangle "Modulo Collaboration" {
+    usecase "Revisar candidatos" as UC7
+    usecase "Dejar feedback" as UC8
+}
+
+C --> UC5
+UC5 --> UC1
+UC1 --> UC2
+UC2 --> UC3
+UC3 ..> UC4 : extends
+UC4 ..> UC6
+UC6 -[dashed]> IA
+
+R --> UC7
+UC7 --> UC8
+UC8 -[dashed]-> UC3
+
+HM --> UC7
+HM --> UC8
+
+note right of UC3
+  El sistema IA rankea candidatos
+  basandose en compatibilidad
+  con requisitos y cultura
+end note
+@enduml```
 
 **Descripción Detallada**:
 
@@ -275,55 +275,55 @@ El candidato aplica a través del portal optimizado. El sistema parsea automáti
 
 ### Caso de Uso 3: Gestión de Entrevistas y Decisión de Hiring
 
-```mermaid
-useCaseDiagram
-    direction TB
-    
-    actor "Reclutador" as R
-    actor "Entrevistador" as E
-    actor "Candidato" as C
-    actor "Hiring Manager" as HM
-    actor "Sistema IA" as IA
-    
-    rectangle "Modulo Entrevistas" {
-        usecase "Schedule entrevista" as UC1
-        usecase "Coordinar disponibilidad" as UC2
-        usecase "Conectar video" as UC3
-    }
-    
-    rectangle "Modulo Evaluacion" {
-        usecase "Completar evaluacion" as UC4
-        usecase "Agregar scorecard" as UC5
-        usecase "Generar reporte IA" as UC6
-    }
-    
-    rectangle "Modulo Decision" {
-        usecase "Recomendar decision" as UC7
-        usecase "Votar equipo" as UC8
-        usecase "Emitir oferta" as UC9
-    }
-    
-    R --> UC1
-    UC1 --> UC2
-    UC2 --> UC3
-    C --> UC3
-    
-    E --> UC4
-    UC4 --> UC5
-    UC5 --> UC6
-    UC6 --> IA
-    
-    HM --> UC7
-    R --> UC7
-    UC7 --> UC8
-    UC8 --> UC9
-    
-    note right of UC6
-      IA genera resumen
-      de entrevistas y
-      sugiere decision
-    end note
-```
+```plantuml
+@startuml
+left to right direction
+
+actor "Reclutador" as R
+actor "Entrevistador" as E
+actor "Candidato" as C
+actor "Hiring Manager" as HM
+actor "Sistema IA" as IA
+
+rectangle "Modulo Entrevistas" {
+    usecase "Schedule entrevista" as UC1
+    usecase "Coordinar disponibilidad" as UC2
+    usecase "Conectar video" as UC3
+}
+
+rectangle "Modulo Evaluacion" {
+    usecase "Completar evaluacion" as UC4
+    usecase "Agregar scorecard" as UC5
+    usecase "Generar reporte IA" as UC6
+}
+
+rectangle "Modulo Decision" {
+    usecase "Recomendar decision" as UC7
+    usecase "Votar equipo" as UC8
+    usecase "Emitir oferta" as UC9
+}
+
+R --> UC1
+UC1 --> UC2
+UC2 --> UC3
+C --> UC3
+
+E --> UC4
+UC4 --> UC5
+UC5 --> UC6
+UC6 -[dashed]-> IA
+
+HM --> UC7
+R --> UC7
+UC7 --> UC8
+UC8 --> UC9
+
+note right of UC6
+  IA genera resumen
+  de entrevistas y
+  sugiere decision
+end note
+@enduml```
 
 **Descripción Detallada**:
 
@@ -653,7 +653,7 @@ sequenceDiagram
 ### 6.4 Diagrama de Arquitectura
 
 ```mermaid
-graph TB
+flowchart TB
     subgraph "Client Layer"
         direction LR
         WEB["Web App<br/>Next.js 14"]
@@ -694,7 +694,9 @@ graph TB
         K8S["Kubernetes"]
         MON["Monitoring"]
         LOG["Logging"]
+    end
     
+    %% Relaciones
     WEB --> LB
     MOBILE --> LB
     WIDGET --> LB

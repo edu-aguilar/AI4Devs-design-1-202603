@@ -34,3 +34,7 @@ Si tienes cualquier duda durante el proceso, no dudes en preguntarme.
   Tech stack: T3 Stack
 3- ¿Cuál es el timeline esperado para lanzar el MVP?
   MVP Timeline: 3-6 meses
+
+# PROMPT 2 - OPENCODE - PLAN MODE
+
+Los useCaseDiagram que has implementado en mermaid no son compatibles. Conviértelos todos a PlantUML para poder visualizarlos en la plataforma https://plantuml.com/es/.
